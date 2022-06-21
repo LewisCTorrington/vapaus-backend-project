@@ -8,6 +8,7 @@ from app.api.deps import get_db
 from app.crud.bikes import create_bike
 from app.crud.bikes import get_bike_by_id
 from app.crud.bikes import update_bike
+from app.crud.organizations import get_organization_by_id
 
 from app.core.vapaus_exception import VapausException
 
@@ -28,11 +29,18 @@ def create(payload: BikePayload, db: Session = Depends(get_db)) -> dict:
     """
     Create a bike object.
     """
-    # email = payload.email
+    organization_id = payload.organization
+
+    if get_organization_by_id(db, organization_id) is None:
+        raise VapausException(
+            status_code=422,
+            error_code="ORGANIZATION_DOES_NOT_EXIST",
+            error_message="The organization id given doesn't exist.",
+        )
 
     bike = create_bike(
         db,
-        organization=payload.organization,
+        organization=organization_id,
         brand=payload.brand,
         model=payload.model,
         price=payload.price,

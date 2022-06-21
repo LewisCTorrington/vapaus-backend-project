@@ -7,6 +7,14 @@ from app.api.v1 import bike
 from app.core.config import settings
 from app.core.vapaus_exception import VapausException
 
+from app.api.deps import populate_organizations
+from app.api.deps import populate_bikes
+
+
+populate_organizations()
+populate_bikes()
+
+
 app = FastAPI(title=settings.PROJECT_NAME)
 
 

@@ -16,6 +16,7 @@ class Organization(BaseModel):
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(255), index=True, nullable=False)
+    business_id = Column(Integer, index=True, nullable=False)
     created_at = Column(
         DateTime(timezone=True),
         default=datetime.datetime.now,

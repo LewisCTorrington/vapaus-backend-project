@@ -12,3 +12,13 @@ def get_db() -> Generator:
         yield db
     finally:
         db.close()
+
+
+def populate_organizations():
+    # TODO: use the data files to populate the orgs
+    print("STUB: populate_organizations")
+
+
+def populate_bikes():
+    # TODO: use the data files to populate the bikes
+    print("STUB: populated bikes")
