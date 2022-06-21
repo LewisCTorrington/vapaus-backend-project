@@ -1,2 +1,2 @@
-from .organisation import Organisation
+from .organization import Organization
 from .bike import Bike

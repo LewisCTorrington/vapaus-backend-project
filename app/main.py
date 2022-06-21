@@ -2,8 +2,6 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.v1 import finalize
-from app.api.v1 import init
 from app.api.v1 import bike
 
 from app.core.config import settings
@@ -34,8 +32,6 @@ async def vapaus_exception_handler(request, exception: VapausException):
 
 
 api_v1_router = APIRouter(prefix="/v1")
-api_v1_router.include_router(init.router)
 api_v1_router.include_router(bike.router)
-api_v1_router.include_router(finalize.router)
 
 app.include_router(api_v1_router)

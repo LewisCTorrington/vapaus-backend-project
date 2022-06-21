@@ -2,6 +2,7 @@ import datetime
 import secrets
 import string
 from sqlalchemy import Column, DateTime, Integer, String, null
+from sqlalchemy.orm import relationship
 
 from app.db.base_model import BaseModel
 
@@ -10,8 +11,8 @@ def create_code():
     return "".join(secrets.choice(string.digits) for i in range(6))
 
 
-class Organisation(BaseModel):
-    __tablename__ = "organisations"
+class Organization(BaseModel):
+    __tablename__ = "organizations"
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(255), index=True, nullable=False)
@@ -20,4 +21,4 @@ class Organisation(BaseModel):
         default=datetime.datetime.now,
         nullable=False
     )
-    verified_at = Column(DateTime(timezone=True), default=null())
+    bikes = relationship("Bike")

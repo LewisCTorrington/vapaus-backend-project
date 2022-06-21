@@ -4,8 +4,10 @@ from sqlalchemy.orm import Session
 from app.models.bike import Bike
 
 
-def create_bike(db: Session, email: str):
-    bike = Bike(email=email)
+def create_bike(db: Session, **kwargs):
+    bike = Bike()
+    for key, value in kwargs.items():
+        setattr(bike, key, value)
 
     db.add(bike)
     db.commit()
@@ -14,9 +16,9 @@ def create_bike(db: Session, email: str):
     return bike
 
 
-def get_bike_by_email(db: Session, email: str):
+def get_bike_by_id(db: Session, id: int):
     result = db.scalars(
-        select(Bike).where(Bike.email == email)
+        select(Bike).where(Bike.id == id)
     ).one_or_none()
     return result
 
